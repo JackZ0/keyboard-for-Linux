@@ -70,7 +70,7 @@ char *event_str[EVENT_NUM] =
                      if(event->len > 0)  
 		     {
                          fprintf(stdout, "%s --- %s\n", event->name, event_str[i]);  
-			 system("/opt/qt_arma10/qt4/start/kill_event");
+			 system("./kill_event");
 		     }	 
                      else  
                          fprintf(stdout, "%s --- %s\n", " ", event_str[i]);  
