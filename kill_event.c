@@ -45,10 +45,9 @@ void read_event()
              ioctl(fd, EVIOCGNAME(sizeof(buf)), buf);
              ioctl(fd, EVIOCGBIT(0, sizeof(mask)), mask);
              printf("%s\n", name);
- //            printf("    evdev version: %d.%d.%d\n",  
- //                   version >> 16, (version >> 8) & 0xff, version & 0xff);  
- //            printf("    name: %s\n", buf);
-  //           printf("    features:");
+             printf("    evdev version: %d.%d.%d\n",  version >> 16, (version >> 8) & 0xff, version & 0xff);  
+            printf("    name: %s\n", buf);
+           printf("    features:");
              for (j = 0; j < EV_MAX; j++) {
                  if (test_bit(j)) {
                      const char *type = "unknown";
@@ -76,7 +75,6 @@ int main(int argc,char **argv)
     FILE *fp;
     struct input_event ie;
     read_event();
-//    read_path_file();
     char name_event[30];
     sprintf(name_event, "/dev/input/event%d", gs_event_num);
 
@@ -91,21 +89,18 @@ int main(int argc,char **argv)
         if (ferror(fp)) 
         {
             perror("fread input event0");
-	//    continue;
             exit(1);
         }
-        //printf("[timeval:sec:%d,usec:%d,type:%d,code:%d,value:%d]/n",ie.time.tv_sec, ie.time.tv_usec,ie.type, ie.code, ie.value); 
         if((ie.type == 1) && (ie.code == 88) &&  (ie.value == 0))
         {
             printf("kill firefox \n");
- //           system("/opt/qt_arma10/qt4/start/1.sh");
             system("ps -ef | grep firefox.sh | grep -v grep | cut -c 9-15 | xargs kill -s 9");
 	    sleep(3);
         }
         else
         {
 	     ;
- //           printf("[type:%d,code:%d,value:%d]\n",ie.type, ie.code, ie.value);
+            printf("[type:%d,code:%d,value:%d]\n",ie.type, ie.code, ie.value);
         }
     }
     return 0;
