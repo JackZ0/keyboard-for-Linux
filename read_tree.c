@@ -21,7 +21,7 @@ int readfile(char *k)
     if(-1 == lstat(fullpath,&buf))  
     {  
         printf("%s[lstat]%s\n",fullpath,strerror(errno));  
-	return -1;  
+        return -1;  
     }  
   
 //***************如果不是目录文件则返回********************************//  
@@ -36,8 +36,8 @@ int readfile(char *k)
     //如果是目录且在尾部没有/符号,那么就在这个文件名尾部加一个/符号  
     if('/' != *(p-1))  
     {  
-	*p++ = '/';  
-	*p = 0;  
+        *p++ = '/';  
+        *p = 0;  
     }  
   
     //输出这个目录  
