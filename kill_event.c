@@ -36,7 +36,7 @@ void read_event()
      int           i, j;
      char          *tmp;
 
- #define test_bit(bit) (mask[(bit)/8] & (1 << ((bit)%8)))  
+#define test_bit(bit) (mask[(bit)/8] & (1 << ((bit)%8)))  
 
      for (i = 0; i < 32; i++) {
          sprintf(name, "/dev/input/event%d", i);
@@ -46,8 +46,8 @@ void read_event()
              ioctl(fd, EVIOCGBIT(0, sizeof(mask)), mask);
              printf("%s\n", name);
              printf("    evdev version: %d.%d.%d\n",  version >> 16, (version >> 8) & 0xff, version & 0xff);  
-            printf("    name: %s\n", buf);
-           printf("    features:");
+             printf("    name: %s\n", buf);
+             printf("    features:");
              for (j = 0; j < EV_MAX; j++) {
                  if (test_bit(j)) {
                      const char *type = "unknown";
