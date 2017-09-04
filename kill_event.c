@@ -39,7 +39,6 @@ void read_event()
 #define test_bit(bit) (mask[(bit)/8] & (1 << ((bit)%8)))  
 
      for (i = 0; i < 32; i++) {
-<<<<<<< HEAD
          sprintf(name, "/dev/input/event%d", i);
          if ((fd = open(name, O_RDONLY, 0)) >= 0) {
              ioctl(fd, EVIOCGVERSION, &version);
@@ -62,7 +61,6 @@ void read_event()
                      case EV_REP: type = "repeat";       break;
                      case EV_FF:  type = "feedback";     break;
                      }
-=======
      sprintf(name, "/dev/input/event%d", i);
      if ((fd = open(name, O_RDONLY, 0)) >= 0) {
          ioctl(fd, EVIOCGVERSION, &version);
@@ -84,7 +82,6 @@ void read_event()
                  case EV_SND: type = "sound";        break;
                  case EV_REP: type = "repeat";       break;
                  case EV_FF:  type = "feedback";     break;
->>>>>>> ac8f7fec52f2e72696680b70ae3bbe179e44a0dc
                  }
              }
          }
