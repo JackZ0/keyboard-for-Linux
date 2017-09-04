@@ -39,6 +39,7 @@ void read_event()
 #define test_bit(bit) (mask[(bit)/8] & (1 << ((bit)%8)))  
 
      for (i = 0; i < 32; i++) {
+<<<<<<< HEAD
          sprintf(name, "/dev/input/event%d", i);
          if ((fd = open(name, O_RDONLY, 0)) >= 0) {
              ioctl(fd, EVIOCGVERSION, &version);
@@ -61,13 +62,36 @@ void read_event()
                      case EV_REP: type = "repeat";       break;
                      case EV_FF:  type = "feedback";     break;
                      }
+=======
+     sprintf(name, "/dev/input/event%d", i);
+     if ((fd = open(name, O_RDONLY, 0)) >= 0) {
+         ioctl(fd, EVIOCGVERSION, &version);
+         ioctl(fd, EVIOCGNAME(sizeof(buf)), buf);
+         ioctl(fd, EVIOCGBIT(0, sizeof(mask)), mask);
+         printf("%s\n", name);
+         printf("    evdev version: %d.%d.%d\n",  version >> 16, (version >> 8) & 0xff, version & 0xff);  
+         printf("    name: %s\n", buf);
+         printf("    features:");
+         for (j = 0; j < EV_MAX; j++) {
+             if (test_bit(j)) {
+                 const char *type = "unknown";
+                 switch(j) {
+                 case EV_KEY: type = "keys/buttons"; break;
+                 case EV_REL: type = "relative";     break;
+                 case EV_ABS: type = "absolute";     break;
+                 case EV_MSC: type = "reserved";     break;
+                 case EV_LED: type = "leds";        gs_event_num = i; break;
+                 case EV_SND: type = "sound";        break;
+                 case EV_REP: type = "repeat";       break;
+                 case EV_FF:  type = "feedback";     break;
+>>>>>>> ac8f7fec52f2e72696680b70ae3bbe179e44a0dc
                  }
-		
              }
-             printf("\n");
-             close(fd);
          }
+         printf("\n");
+         close(fd);
      }
+    }
 }
 int main(int argc,char **argv)
 {
@@ -81,7 +105,7 @@ int main(int argc,char **argv)
     fp = fopen(name_event, "r");
     if (NULL == fp)
     {
-	printf("open error \n");
+        printf("open error \n");
     }
     while (1)
     {
@@ -95,11 +119,11 @@ int main(int argc,char **argv)
         {
             printf("kill firefox \n");
             system("ps -ef | grep firefox.sh | grep -v grep | cut -c 9-15 | xargs kill -s 9");
-	    sleep(3);
+            sleep(3);
         }
         else
         {
-	     ;
+            ;
             printf("[type:%d,code:%d,value:%d]\n",ie.type, ie.code, ie.value);
         }
     }
