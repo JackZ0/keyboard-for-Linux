@@ -1,8 +1,6 @@
 #include <stdio.h>   
 #include <time.h>   
-    
 void init_daemon(void);//守护进程初始化函数   
-    
 main()   
 {   
     FILE *fp;   
